@@ -1,0 +1,4 @@
+# PracticeJava
+
+* Spring Boot
+* GraphQL
