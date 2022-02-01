@@ -32,4 +32,11 @@ public class FakeTodosDataResolver {
         );
     }
 
+    @DgsQuery
+    public TodoItem showTodo(@InputArgument(name = "id") String id) {
+        return FakeTodosDataSource.TODOS_LIST.stream().filter(todoItem -> todoItem.getId().equals(id))
+                .findAny()
+                .orElse(null);
+    }
+
 }

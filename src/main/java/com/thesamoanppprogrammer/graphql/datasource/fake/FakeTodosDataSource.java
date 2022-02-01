@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Configuration
 public class FakeTodosDataSource {
@@ -21,6 +22,7 @@ public class FakeTodosDataSource {
     private void postConstruct() {
         for (int i = 0; i < 20; i++) {
             var todo = TodoItem.newBuilder()
+                    .id(UUID.randomUUID().toString())
                     .todoTitle(faker.job().title())
                     .completed(faker.bool().bool())
                     .build();
