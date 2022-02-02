@@ -6,3 +6,11 @@ logging:
 spring:
   main:
     banner-mode: OFF
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=todos
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false

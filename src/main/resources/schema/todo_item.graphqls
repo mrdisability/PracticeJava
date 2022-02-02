@@ -1,0 +1,48 @@
+scalar Boolean
+scalar ID
+scalar String
+scalar Int
+
+type TodoItem implements SearchableItem {
+    id: ID!
+    todoTitle: String!
+    completed: Boolean
+}
+
+type Query {
+    allTodos: [TodoItem!]
+    oneTodo: TodoItem!
+    todos(isCompleted: Boolean): [TodoItem!]
+    showTodo(id: String): TodoItem!
+
+    itemSearch(filter: SearchItemFilter): [SearchableItem]
+    todoDetail(id: ID!): TodoItem!
+}
+
+type Mutation {
+    deleteTodo(number: Int!): Int
+    createTodo(todo: TodoItemCreateInput!): TodoItemResponse!
+}
+
+type Subscription {
+    randomTodo: TodoItem
+    todoItemAdded: TodoItem!
+}
+
+interface SearchableItem {
+    id: ID!
+    todoTitle: String!
+}
+
+input SearchItemFilter {
+    keyword: String
+}
+
+input TodoItemCreateInput {
+    todoTitle: String!
+    completed: Boolean
+}
+
+type TodoItemResponse {
+    todo: TodoItem
+}
