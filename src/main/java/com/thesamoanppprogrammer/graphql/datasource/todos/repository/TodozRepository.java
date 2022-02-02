@@ -15,7 +15,7 @@ public interface TodozRepository extends CrudRepository<Todoz, UUID> {
     List<Todoz> findAll();
 
     @Query(nativeQuery = true, value = "select * from todoz t "
-            + "where upper(todoTitle) like upper(:keyword)")
+            + "where upper(todo_title) like upper(:keyword)")
     List<Todoz> findByKeyword(@Param("keyword") String keyword);
 
 }
