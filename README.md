@@ -2,3 +2,4 @@
 
 * Spring Boot
 * GraphQL
+* PostgreSQL
