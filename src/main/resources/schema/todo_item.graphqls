@@ -40,7 +40,6 @@ input SearchItemFilter {
 
 input TodoItemCreateInput {
     todoTitle: String!
-    completed: Boolean
 }
 
 type TodoItemResponse {
