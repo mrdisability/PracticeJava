@@ -4,6 +4,7 @@ import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsData;
 import com.netflix.graphql.dgs.InputArgument;
 import com.netflix.graphql.dgs.exceptions.DgsEntityNotFoundException;
+import com.thesamoanppprogrammer.graphql.datasource.todos.entity.Todoz;
 import com.thesamoanppprogrammer.graphql.generated.DgsConstants;
 import com.thesamoanppprogrammer.graphql.generated.types.TodoItem;
 import com.thesamoanppprogrammer.graphql.generated.types.TodoItemCreateInput;
@@ -49,6 +50,23 @@ public class TodoDataResolver {
         var created = commandService.createTodoz(todoz);
 
         return TodoItemResponse.newBuilder().todo(GraphqlBeanMapper.mapToGraphql(created)).build();
+    }
+
+    @DgsData(parentType = DgsConstants.MUTATION.TYPE_NAME, field = DgsConstants.MUTATION.DeleteTodo)
+    public Boolean deleteTodo(@InputArgument(name = "id") String todoId) {
+        commandService.deleteTodo(UUID.fromString(todoId));
+
+        return true;
+    }
+
+    @DgsData(parentType = DgsConstants.MUTATION.TYPE_NAME, field = DgsConstants.MUTATION.UpdateTodo)
+    public Todoz updateTodo(@InputArgument(name = "id") String todoId, @InputArgument(name = "todoTitle") String todoTitle,
+                            @InputArgument(name = "completed") Boolean completed) {
+        var todozId = UUID.fromString(todoId);
+
+        var todo = commandService.updateTodo(todozId, todoTitle, completed);
+
+        return todo;
     }
 
     @DgsData(parentType = DgsConstants.SUBSCRIPTION_TYPE, field = DgsConstants.SUBSCRIPTION.TodoItemAdded)

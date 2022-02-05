@@ -20,8 +20,9 @@ type Query {
 }
 
 type Mutation {
-    deleteTodo(number: Int!): Int
+    deleteTodo(id: ID!): Boolean
     createTodo(todo: TodoItemCreateInput!): TodoItemResponse!
+    updateTodo(id: ID!, todoTitle: String, completed: Boolean): TodoItem!
 }
 
 type Subscription {
